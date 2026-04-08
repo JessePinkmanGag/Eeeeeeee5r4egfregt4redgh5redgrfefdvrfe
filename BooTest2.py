@@ -1,30 +1,3 @@
-# WARN: This one is for educational purposes only! I do not recommend using it on people
-import subprocess
-import sys
-
-# List of all required packages
-packages = [
-    "psutil",
-    "platform",
-    "requests",
-    "browser-cookie3",
-    "cryptography",
-    "pycryptodome",
-    "dhooks"
-]
-
-for pkg in packages:
-    try:
-        # Try importing; convert pip-style names to Python module names if needed
-        module_name = pkg.replace("-", "_")
-        __import__(module_name)
-    except ImportError:
-        print(f"Installing {pkg}...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", pkg])
-print("All packages installed!")
-
-
-
 import psutil
 import platform
 import json
