@@ -1,38 +1,3 @@
-import subprocess
-import sys
-
-# List of all external libraries
-packages = [
-    "requests",   # requests
-    "pywin32"     # win32crypt
-]
-
-def install_package(pkg):
-    """Install a single pip package silently."""
-    try:
-        subprocess.check_call(
-            [sys.executable, "-m", "pip", "install", pkg],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL
-        )
-        print(f"{pkg} installed successfully.")
-    except Exception as e:
-        print(f"Failed to install {pkg}: {e}")
-
-for pkg in packages:
-    module_name = pkg.replace("-", "_")
-    try:
-        __import__(module_name)  # check if already installed
-    except ImportError:
-        install_package(pkg)
-
-print("All required libraries installed!")
-
-
-
-
-
-
 import os
 import shutil
 import json
