@@ -1,10 +1,9 @@
 # WARN: This one is for educational purposes only! I do not recommend using it on people
 import subprocess
 import sys
-import threading
 
-# List all required packages
-required_packages = [
+# List of all required packages
+packages = [
     "psutil",
     "platform",
     "requests",
@@ -14,23 +13,15 @@ required_packages = [
     "dhooks"
 ]
 
-def install_package(pkg):
-    """Install a single package using pip"""
+for pkg in packages:
     try:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", pkg], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    except Exception as e:
-        print(f"Failed to install {pkg}: {e}")
-
-def install_packages_background(packages):
-    """Install all packages in a separate thread so main script continues"""
-    for pkg in packages:
-        try:
-            __import__(pkg.replace("-", "_"))  # Try importing
-        except ImportError:
-            install_package(pkg)
-
-# Start installation in the background
-threading.Thread(target=install_packages_background, args=(required_packages,), daemon=True).start()
+        # Try importing; convert pip-style names to Python module names if needed
+        module_name = pkg.replace("-", "_")
+        __import__(module_name)
+    except ImportError:
+        print(f"Installing {pkg}...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", pkg])
+print("All packages installed!")
 
 
 
